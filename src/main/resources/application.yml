@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://127.0.0.1:5432/crm}
+    username: ${APP_DB_USER:app}
+    password: ${APP_DB_PASSWORD:eurochem}
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      idle-timeout: 60000
+      max-lifetime: 45000
+      validation-timeout: 250
+  main:
+    allow-circular-references: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    enabled: false

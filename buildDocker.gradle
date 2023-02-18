@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/milestone/" }
+    }
+    dependencies {
+        classpath "com.avast.gradle:gradle-docker-compose-plugin:0.14.9"
+    }
+}
+
+apply plugin: 'docker-compose'
+
+//dockerCompose.isRequiredBy(test)
+
+
+dockerCompose {
+    projectName = "crm"
+    useComposeFiles = ['.docker/docker-compose.yml']    // like 'docker-compose -f <file>'; default is empty
+//    forceRecreate = true // pass '--force-recreate' and '--renew-anon-volumes' when calling 'docker-compose up' when set to 'true`
+//    buildAdditionalArgs = ['--force-rm']
+//    downAdditionalArgs = ['-f']
+
+    removeVolumes = false // default is true
+    // allow to set custom docker-compose project name (defaults to a stable name derived from absolute path of the project and nested settings name), set to null to Docker Compose default (directory name)
+
+    databaseService {
+        projectName = "crm"
+        useComposeFiles = ['.docker/docker-compose.yml']
+        startedServices = ['crm-database']
+        pushServices = ['crm-database']
+    }
+}
+
+
+task upDatabase(type: GradleBuild) {
+    group '.compose'
+    tasks = ['databaseServiceComposeUp']
+    description 'start pure database container'
+}
+
+task downDatabaseDev(type: GradleBuild) {
+    group '.compose'
+    tasks = ['databaseServiceComposeDownForced']
+    description 'stop and remove database container'
+}
+

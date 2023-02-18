@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        maven { url "https://mvnrepository.com" }
+        maven { url "https://repo1.maven.org/maven2" }
+    }
+    dependencies {
+        classpath "com.avast.gradle:gradle-docker-compose-plugin:0.13.2"
+        classpath "org.openapitools:openapi-generator-gradle-plugin:5.4.0"
+    }
+}
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'net.nemerosa.versioning' version '2.6.1'
+}
+
+group = 'ru.crm'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.liquibase:liquibase-core'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'com.github.Miha5418:crm-admin-api:d0491881e7'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+apply from: 'buildDocker.gradle'
