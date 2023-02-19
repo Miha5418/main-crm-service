@@ -3,7 +3,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: ${DB_URL:jdbc:postgresql://127.0.0.1:5432/crm}
     username: ${APP_DB_USER:app}
-    password: ${APP_DB_PASSWORD:eurochem}
+    password: ${APP_DB_PASSWORD:crm}
     hikari:
       maximum-pool-size: 50
       minimum-idle: 10
@@ -13,8 +13,18 @@ spring:
   main:
     allow-circular-references: true
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database: POSTGRESQL
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+
   liquibase:
     enabled: false
+
+
+springdoc:
+  swagger-ui:
+    url: /openapi/ui/crm-public
+  api-docs:
+    path: /openapi/docs/crm-public
