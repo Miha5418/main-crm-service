@@ -30,21 +30,42 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
+ext {
+    set('mapstructVersion', "1.4.2.Final")
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.liquibase:liquibase-core'
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
     runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    implementation 'com.github.Miha5418:crm-admin-api:d0491881e7'
+    implementation 'com.github.Miha5418:crm-admin-api:af4cec4e'
+
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
+    implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.6.7'
+    implementation 'io.swagger.parser.v3:swagger-parser-v3:2.0.25'
+
+
+
+
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+compileJava {
+    options.compilerArgs = [
+            '-Amapstruct.defaultComponentModel=spring'
+    ]
 }
 
 apply from: 'buildDocker.gradle'
