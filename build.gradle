@@ -32,6 +32,8 @@ repositories {
 
 ext {
     set('mapstructVersion', "1.4.2.Final")
+    set('crmAdminApiVersion', 'f20172e7')
+    set('crmUserApiVersion', '84a76ec9')
 }
 
 dependencies {
@@ -43,14 +45,14 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    implementation 'com.github.Miha5418:crm-admin-api:af4cec4e'
+    //API
+    implementation "com.github.Miha5418:crm-admin-api:${crmAdminApiVersion}"
+    implementation "com.github.Miha5418:crm-user-api:Tag${crmUserApiVersion}"
+
 
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
     implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.6.7'
     implementation 'io.swagger.parser.v3:swagger-parser-v3:2.0.25'
-
-
-
 
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"

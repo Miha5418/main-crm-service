@@ -34,12 +34,17 @@ public class ClientController implements ClientApi {
     }
 
     @Override
-    public ResponseEntity<ClientInfo> getClientInfoById(Integer clientId) {
-        return null;
+    public ResponseEntity<ClientInfo> getClientInfoById(Long clientId) {
+        val client = clientService.getClientByMemberShipNumber(clientId);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(restClientMapper.createClientInfoDto(client));
     }
 
     @Override
     public ResponseEntity<ClientInfoPageable> getListClientInfo(@Valid PageParams pageParams) {
-        return null;
+        val pageClient = clientService.getClientList(pageParams);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pageClient);
     }
 }
