@@ -1,4 +1,4 @@
-package ru.crm.maincrmservice.admin.mapper;
+package ru.crm.maincrmservice.mapper;
 
 import lombok.val;
 import org.mapstruct.Mapper;
@@ -9,6 +9,7 @@ import ru.crm.maincrmservice.entity.client.Client;
 import ru.crm.rest.admin.openapi.model.ClientInfo;
 import ru.crm.rest.admin.openapi.model.ClientInfoPageable;
 import ru.crm.rest.admin.openapi.model.PageParams;
+import ru.crm.rest.user.openapi.model.ResponseIsActiveClient;
 
 import java.time.Instant;
 
@@ -33,6 +34,16 @@ public interface ClientMapper {
      * @return ДТО
      */
     ClientInfo createClientInfoDto(Client src);
+
+    /**
+     * Маппит сущность клиента в ДТО, для ответа на запрос окончания срока действия аббонемента
+     *
+     * @param src сущность БД
+     * @return дто
+     */
+
+    @Mapping(source = "memberShipDateEnd", target = "expirationDate")
+    ResponseIsActiveClient createClientByResponseIsActiveClientDto(Client src);
 
     /**
      * Мапинг в ДТО списка клиентов с пагинацие

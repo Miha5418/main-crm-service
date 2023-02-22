@@ -1,4 +1,4 @@
-package ru.crm.maincrmservice.admin.mapper.restMapper;
+package ru.crm.maincrmservice.mapper.restMapper;
 
 import org.mapstruct.Mapper;
 import ru.crm.maincrmservice.entity.client.Client;
