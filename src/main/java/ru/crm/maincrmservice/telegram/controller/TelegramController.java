@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import ru.crm.maincrmservice.telegram.service.TelegramSevice;
 import ru.crm.rest.user.openapi.api.TelegramApi;
 import ru.crm.rest.user.openapi.model.RequestIsActiveClient;
+import ru.crm.rest.user.openapi.model.ResponseIsActiveClient;
 import ru.crm.rest.user.openapi.model.TelegramRegistration;
 
 import javax.validation.Valid;
@@ -18,13 +19,13 @@ public class TelegramController implements TelegramApi {
     private final TelegramSevice telegramSevice;
 
     @Override
-    public ResponseEntity registrationClient(@Valid TelegramRegistration telegramRegistration) {
+    public ResponseEntity<Void> registrationClient(@Valid TelegramRegistration telegramRegistration) {
         return telegramSevice.addedClientIdByTelegramId(telegramRegistration.getTelegramId(),
                 telegramRegistration.getClientId());
     }
 
     @Override
-    public ResponseEntity isActiveClient(@Valid RequestIsActiveClient requestIsActiveClient) {
+    public ResponseEntity<ResponseIsActiveClient> isActiveClient(@Valid RequestIsActiveClient requestIsActiveClient) {
         return telegramSevice.isActiveClient(requestIsActiveClient.getTelegramId());
     }
 }

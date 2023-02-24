@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import ru.crm.maincrmservice.admin.service.ClientService;
-import ru.crm.maincrmservice.mapper.restMapper.RestClientMapper;
+import ru.crm.maincrmservice.admin.mapper.restMapper.RestClientMapper;
 import ru.crm.rest.admin.openapi.model.ClientInfo;
 import ru.crm.rest.admin.openapi.model.ClientInfoPageable;
 import ru.crm.rest.admin.openapi.model.PageParams;

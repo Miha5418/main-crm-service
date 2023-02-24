@@ -6,12 +6,12 @@ import lombok.val;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.crm.maincrmservice.admin.mapper.ClientMapperAdmin;
 import ru.crm.maincrmservice.config.AppConfig;
 import ru.crm.maincrmservice.entity.client.Client;
 import ru.crm.maincrmservice.exception.ExceptionBusyMemberShipNumber;
 import ru.crm.maincrmservice.exception.NotFoundException;
 import ru.crm.maincrmservice.helpers.ClientHelper;
-import ru.crm.maincrmservice.mapper.ClientMapper;
 import ru.crm.maincrmservice.repository.ClientRepository;
 import ru.crm.rest.admin.openapi.model.ClientInfo;
 import ru.crm.rest.admin.openapi.model.ClientInfoPageable;
@@ -26,7 +26,7 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientHelper clientHelper;
-    private final ClientMapper clientMapper;
+    private final ClientMapperAdmin clientMapperAdmin;
     private final AppConfig appConfig;
 
     /**
@@ -41,7 +41,7 @@ public class ClientService {
             throw new ExceptionBusyMemberShipNumber();
         }
 
-        val clientEntity = clientMapper.createClientEntity(clientInfo);
+        val clientEntity = clientMapperAdmin.createClientEntity(clientInfo);
 
         return clientRepository.save(clientEntity);
     }
@@ -69,7 +69,7 @@ public class ClientService {
 
         val pageClient = clientRepository.findAll(pageable);
 
-        return clientMapper.createClientInfoPageable(pageClient, pageable);
+        return clientMapperAdmin.createClientInfoPageable(pageClient, pageable);
     }
 
     /**
