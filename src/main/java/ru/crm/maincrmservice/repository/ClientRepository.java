@@ -7,10 +7,12 @@ import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    Client findByTelegramId(String telegramId);
+    Optional<Client> findByTelegramId(String telegramId);
 
     boolean existsByMemberShipNumber(Long id);
 
     Optional<Client> findByMemberShipNumber(Long id);
+
+    boolean existsByTelegramId(String telegramId);
 
 }

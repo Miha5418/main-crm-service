@@ -33,7 +33,7 @@ repositories {
 ext {
     set('mapstructVersion', "1.4.2.Final")
     set('crmAdminApiVersion', 'f20172e7')
-    set('crmUserApiVersion', '84a76ec9')
+    set('crmUserApiVersion', '763562d3')
 }
 
 dependencies {
@@ -47,7 +47,7 @@ dependencies {
 
     //API
     implementation "com.github.Miha5418:crm-admin-api:${crmAdminApiVersion}"
-    implementation "com.github.Miha5418:crm-user-api:Tag${crmUserApiVersion}"
+    implementation "com.github.Miha5418:crm-user-api:${crmUserApiVersion}"
 
 
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'

@@ -15,7 +15,7 @@ import java.time.Instant;
 @Mapper(imports = {
         Instant.class
 })
-public interface ClientMapper {
+public interface ClientMapperAdmin {
 
     /**
      * Создание сущности из ДТО
