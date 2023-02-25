@@ -8,6 +8,7 @@ import ru.crm.maincrmservice.helpers.ClientHelper;
 import ru.crm.maincrmservice.repository.ClientRepository;
 import ru.crm.maincrmservice.telegram.mapper.ClientMapperTelegram;
 import ru.crm.rest.user.openapi.model.ResponseIsActiveClient;
+import ru.crm.rest.user.openapi.model.TelegramRegistration;
 
 @Slf4j
 @Service
@@ -17,9 +18,10 @@ public class TelegramSevice {
     private final ClientRepository clientRepository;
     private final ClientHelper clientHelper;
 
-    public ResponseEntity<Void> addedClientIdByTelegramId(String telegramId, String clientId) {
+    public ResponseEntity<Void> addTelegramIdByClientId(TelegramRegistration telegramRegistration) {
+        String telegramId = telegramRegistration.getTelegramId();
         clientHelper.checkForUniqueTelegramId(telegramId);
-        var client = clientHelper.findClientByMemberShipNumber(Long.parseLong(clientId));
+        var client = clientHelper.findClientByMemberShipNumber(Long.parseLong(telegramRegistration.getClientId()));
         client.setTelegramId(telegramId);
         clientRepository.save(client);
         return ResponseEntity.ok(null);

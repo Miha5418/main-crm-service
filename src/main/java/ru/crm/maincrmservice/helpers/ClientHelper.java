@@ -21,7 +21,7 @@ public class ClientHelper {
      * @param memberShipNumber Номер аббонимента
      */
     public Client findClientByMemberShipNumber(Long memberShipNumber) {
-       return clientRepository.findByMemberShipNumber(memberShipNumber)
+        return clientRepository.findByMemberShipNumber(memberShipNumber)
                 .orElseThrow(NotFoundException::new);
 
     }
@@ -38,20 +38,23 @@ public class ClientHelper {
 
     /**
      * Найти клиента по telegramId
+     *
      * @param telegramId входной прамметр
      * @return сущность клиента из БД
      */
     public Client findClientByTelegramId(String telegramId) {
-        return clientRepository.findByTelegramId(telegramId).orElseThrow(NotFoundException::new);
+        return clientRepository.findByTelegramId(telegramId)
+                .orElseThrow(NotFoundException::new);
     }
 
     /**
      * Проверить идентификатор телеграма на уникальность
+     *
      * @param telegramId проверяемый идентификатор
      */
-    public  void checkForUniqueTelegramId (String telegramId){
+    public void checkForUniqueTelegramId(String telegramId) {
 
-        if (clientRepository.checkIfTelegramIdIsFree(telegramId)){
+        if (clientRepository.existsByTelegramId(telegramId)) {
             throw new NotUniqueValueException();
         }
     }

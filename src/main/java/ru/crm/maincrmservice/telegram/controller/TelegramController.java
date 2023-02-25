@@ -20,8 +20,7 @@ public class TelegramController implements TelegramApi {
 
     @Override
     public ResponseEntity<Void> registrationClient(@Valid TelegramRegistration telegramRegistration) {
-        return telegramSevice.addedClientIdByTelegramId(telegramRegistration.getTelegramId(),
-                telegramRegistration.getClientId());
+        return telegramSevice.addTelegramIdByClientId(telegramRegistration);
     }
 
     @Override
